@@ -1,0 +1,686 @@
+// latihan 1
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Latihan 1 - Variabel dan Tipe Data</title>
+</head>
+<body>
+    <h2>Latihan 1: Variabel dan Tipe Data</h2>
+    <div id="output"></div>
+
+    <script>
+        let nama = "John Doe";
+        let umur = 25;
+        let statusMenikah = false;
+
+        // Output ke Console
+        console.log("Nama: " + nama);
+        console.log("Umur: " + umur);
+        console.log("Status Menikah: " + statusMenikah);
+
+        // Output ke Layar Halaman Web
+        document.getElementById("output").innerHTML = `
+            <p><strong>Nama:</strong> ${nama}</p>
+            <p><strong>Umur:</strong> ${umur}</p>
+            <p><strong>Status Menikah:</strong> ${statusMenikah}</p>
+        `;
+    </script>
+</body>
+</html>
+
+// latihan 2
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Latihan 2 - Operator dan Fungsi</title>
+</head>
+<body>
+    <h2>Latihan 2: Operator dan Fungsi</h2>
+    <div id="output"></div>
+
+    <script>
+        function hitungLuas(panjang, lebar) {
+            return panjang * lebar;
+        }
+
+        let luas1 = hitungLuas(5, 8);
+        let luas2 = hitungLuas(10, 3);
+
+        // Output ke Console
+        console.log("Luas persegi panjang dengan panjang 5 dan lebar 8 adalah: " + luas1);
+        console.log("Luas persegi panjang dengan panjang 10 dan lebar 3 adalah: " + luas2);
+
+        // Output ke Layar Halaman Web
+        document.getElementById("output").innerHTML = `
+            <p>Luas persegi panjang dengan panjang 5 dan lebar 8 adalah: <strong>${luas1}</strong></p>
+            <p>Luas persegi panjang dengan panjang 10 dan lebar 3 adalah: <strong>${luas2}</strong></p>
+        `;
+    </script>
+</body>
+</html>
+
+// latihan 3
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Latihan 3 - Manipulasi DOM</title>
+</head>
+<body>
+    <h2>Latihan 3: Manipulasi DOM Dasar</h2>
+    <div id="output3"></div>
+
+    <script>
+        let btnBackground = document.createElement("button");
+        btnBackground.textContent = "Ubah Latar Belakang";
+        btnBackground.onclick = function() {
+            document.body.style.backgroundColor = "#e8f4fc";
+        };
+
+        let btnTextColor = document.createElement("button");
+        btnTextColor.textContent = "Ubah Warna Teks";
+        btnTextColor.onclick = function() {
+            document.body.style.color = "#2c3e50";
+        };
+
+        let btnIncreaseFont = document.createElement("button");
+        btnIncreaseFont.textContent = "Perbesar Font";
+        btnIncreaseFont.onclick = function() {
+            let currentSize = parseInt(getComputedStyle(document.body).fontSize);
+            document.body.style.fontSize = (currentSize + 1) + "px";
+        };
+
+        let outputDiv = document.getElementById("output3");
+        outputDiv.appendChild(btnBackground);
+        outputDiv.appendChild(btnTextColor);
+        outputDiv.appendChild(btnIncreaseFont);
+    </script>
+</body>
+</html>
+
+// latihan 4
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Latihan 4 - Event Handling</title>
+</head>
+<body>
+    <h2>Latihan 4: Event Handling & Validasi Form</h2>
+    <div id="output4"></div>
+
+    <script>
+        let form = document.createElement("form");
+
+        let labelNama = document.createElement("label");
+        labelNama.textContent = "Nama: ";
+        let inputNama = document.createElement("input");
+        inputNama.type = "text";
+
+        let labelEmail = document.createElement("label");
+        labelEmail.textContent = "Email: ";
+        let inputEmail = document.createElement("input");
+        inputEmail.type = "email";
+
+        let btnSubmit = document.createElement("button");
+        btnSubmit.type = "button";
+        btnSubmit.textContent = "Submit";
+
+        let errorDiv = document.createElement("div");
+        errorDiv.style.marginTop = "10px";
+
+        btnSubmit.onclick = function() {
+            let nama = inputNama.value.trim();
+            let email = inputEmail.value.trim();
+            let errorMessage = "";
+
+            if (nama === "") {
+                errorMessage += "Nama tidak boleh kosong. ";
+            }
+            if (email.indexOf("@") === -1) {
+                errorMessage += "Email harus mengandung @. ";
+            }
+
+            if (errorMessage !== "") {
+                errorDiv.textContent = errorMessage;
+                errorDiv.style.color = "red";
+            } else {
+                errorDiv.textContent = "Form valid! Data berhasil dikirim.";
+                errorDiv.style.color = "green";
+            }
+        };
+
+        form.appendChild(labelNama);
+        form.appendChild(inputNama);
+        form.appendChild(document.createElement("br"));
+        form.appendChild(document.createElement("br"));
+        form.appendChild(labelEmail);
+        form.appendChild(inputEmail);
+        form.appendChild(document.createElement("br"));
+        form.appendChild(document.createElement("br"));
+        form.appendChild(btnSubmit);
+        form.appendChild(errorDiv);
+
+        document.getElementById("output4").appendChild(form);
+    </script>
+</body>
+</html>
+
+// latihan 5
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Latihan 5 - To-Do List</title>
+</head>
+<body>
+    <h2>Latihan 5: Aplikasi To-Do List</h2>
+    <div id="output5"></div>
+
+    <script>
+        let inputTask = document.createElement("input");
+        inputTask.type = "text";
+        inputTask.placeholder = "Masukkan tugas baru...";
+
+        let btnAdd = document.createElement("button");
+        btnAdd.textContent = "Tambah";
+
+        let taskList = document.createElement("ul");
+        taskList.id = "task-list";
+
+        btnAdd.onclick = function() {
+            let taskText = inputTask.value.trim();
+            if (taskText !== "") {
+                addTask(taskText);
+                inputTask.value = "";
+                saveTasks();
+            }
+        };
+
+        function addTask(taskText) {
+            let li = document.createElement("li");
+
+            let checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.addEventListener("change", function() {
+                if (this.checked) {
+                    taskSpan.style.textDecoration = "line-through";
+                } else {
+                    taskSpan.style.textDecoration = "none";
+                }
+                saveTasks();
+            });
+
+            let taskSpan = document.createElement("span");
+            taskSpan.textContent = taskText;
+
+            let deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Hapus";
+            deleteBtn.style.marginLeft = "10px";
+            deleteBtn.addEventListener("click", function() {
+                li.remove();
+                saveTasks();
+            });
+
+            li.appendChild(checkbox);
+            li.appendChild(taskSpan);
+            li.appendChild(deleteBtn);
+            taskList.appendChild(li);
+        }
+
+        function saveTasks() {
+            let tasks = [];
+            document.querySelectorAll("#task-list li").forEach(function(li) {
+                let taskText = li.querySelector("span").textContent;
+                let isCompleted = li.querySelector("input[type='checkbox']").checked;
+                tasks.push({ text: taskText, completed: isCompleted });
+            });
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+        }
+
+        function loadTasks() {
+            let savedTasks = localStorage.getItem("tasks");
+            if (savedTasks) {
+                let tasks = JSON.parse(savedTasks);
+                tasks.forEach(function(task) {
+                    addTask(task.text);
+                    let lastAdded = taskList.lastChild;
+                    let checkbox = lastAdded.querySelector("input[type='checkbox']");
+                    checkbox.checked = task.completed;
+                    if (task.completed) {
+                        lastAdded.querySelector("span").style.textDecoration = "line-through";
+                    }
+                });
+            }
+        }
+
+        let outputDiv = document.getElementById("output5");
+        outputDiv.appendChild(inputTask);
+        outputDiv.appendChild(btnAdd);
+        outputDiv.appendChild(taskList);
+        loadTasks();
+    </script>
+</body>
+</html>
+
+// std.kasus 1
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Studi Kasus - Kalkulator Sederhana</title>
+</head>
+<body>
+    <h2>Studi Kasus: Kalkulator Sederhana</h2>
+    <div>
+        <input type="number" id="angka1" placeholder="Angka pertama">
+        <input type="number" id="angka2" placeholder="Angka kedua">
+    </div>
+    <br>
+    <div>
+        <button onclick="hitung('+')">+</button>
+        <button onclick="hitung('-')">-</button>
+        <button onclick="hitung('*')">*</button>
+        <button onclick="hitung('/')">/</button>
+    </div>
+    <h3>Hasil: <span id="hasil">0</span></h3>
+
+    <script>
+        function hitung(operator) {
+            let val1 = parseFloat(document.getElementById("angka1").value);
+            let val2 = parseFloat(document.getElementById("angka2").value);
+            let hasilElement = document.getElementById("hasil");
+
+            if (isNaN(val1) || isNaN(val2)) {
+                hasilElement.textContent = "Harap masukkan kedua angka!";
+                return;
+            }
+
+            let hasil = 0;
+            switch (operator) {
+                case '+':
+                    hasil = val1 + val2;
+                    break;
+                case '-':
+                    hasil = val1 - val2;
+                    break;
+                case '*':
+                    hasil = val1 * val2;
+                    break;
+                case '/':
+                    if (val2 === 0) {
+                        hasilElement.textContent = "Tidak dapat dibagi dengan 0!";
+                        return;
+                    }
+                    hasil = val1 / val2;
+                    break;
+            }
+
+            hasilElement.textContent = hasil;
+        }
+    </script>
+</body>
+</html>
+
+// std.kasus 1 dengan css
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studi Kasus - Kalkulator Sederhana</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .calculator-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cccccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="number"]:focus {
+            border-color: #3498db;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.1s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        button:active {
+            transform: scale(0.96);
+        }
+
+        .result-box {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .result-box h3 {
+            margin: 0;
+            color: #34495e;
+            font-size: 1.1rem;
+            word-break: break-word;
+        }
+
+        #hasil {
+            color: #27ae60;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator-card">
+        <h2>Kalkulator Sederhana</h2>
+        
+        <div class="input-group">
+            <input type="number" id="angka1" placeholder="Masukkan angka pertama">
+            <input type="number" id="angka2" placeholder="Masukkan angka kedua">
+        </div>
+
+        <div class="button-group">
+            <button onclick="hitung('+')">+</button>
+            <button onclick="hitung('-')">-</button>
+            <button onclick="hitung('*')">×</button>
+            <button onclick="hitung('/')">÷</button>
+        </div>
+
+        <div class="result-box">
+            <h3>Hasil: <span id="hasil">0</span></h3>
+        </div>
+    </div>
+
+    <script>
+        function hitung(operator) {
+            let val1 = parseFloat(document.getElementById("angka1").value);
+            let val2 = parseFloat(document.getElementById("angka2").value);
+            let hasilElement = document.getElementById("hasil");
+
+            if (isNaN(val1) || isNaN(val2)) {
+                hasilElement.textContent = "Harap masukkan kedua angka!";
+                hasilElement.style.color = "#e74c3c";
+                return;
+            }
+
+            let hasil = 0;
+            switch (operator) {
+                case '+':
+                    hasil = val1 + val2;
+                    break;
+                case '-':
+                    hasil = val1 - val2;
+                    break;
+                case '*':
+                    hasil = val1 * val2;
+                    break;
+                case '/':
+                    if (val2 === 0) {
+                        hasilElement.textContent = "Tidak dapat dibagi dengan 0!";
+                        hasilElement.style.color = "#e74c3c";
+                        return;
+                    }
+                    hasil = val1 / val2;
+                    break;
+            }
+
+            hasilElement.textContent = hasil;
+            hasilElement.style.color = "#27ae60";
+        }
+    </script>
+
+</body>
+</html>
+
+// std.kasus 1 dengan css dan bg
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studi Kasus - Kalkulator Sederhana</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            /* Background Gambar dengan Gradasi Overlay Soft */
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1600&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .calculator-card {
+            /* Efek Transparan (Glassmorphism) */
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #bdc3c7;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+            background-color: #ffffff;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #3498db;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-box {
+            background-color: rgba(236, 240, 241, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 1px solid #dcdde1;
+        }
+
+        .result-box h3 {
+            margin: 0;
+            color: #34495e;
+            font-size: 1.1rem;
+            word-break: break-word;
+        }
+
+        #hasil {
+            color: #27ae60;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator-card">
+        <h2>Kalkulator Sederhana</h2>
+        
+        <div class="input-group">
+            <input type="number" id="angka1" placeholder="Masukkan angka pertama">
+            <input type="number" id="angka2" placeholder="Masukkan angka kedua">
+        </div>
+
+        <div class="button-group">
+            <button onclick="hitung('+')">+</button>
+            <button onclick="hitung('-')">-</button>
+            <button onclick="hitung('*')">×</button>
+            <button onclick="hitung('/')">÷</button>
+        </div>
+
+        <div class="result-box">
+            <h3>Hasil: <span id="hasil">0</span></h3>
+        </div>
+    </div>
+
+    <script>
+        function hitung(operator) {
+            let val1 = parseFloat(document.getElementById("angka1").value);
+            let val2 = parseFloat(document.getElementById("angka2").value);
+            let hasilElement = document.getElementById("hasil");
+
+            if (isNaN(val1) || isNaN(val2)) {
+                hasilElement.textContent = "Harap masukkan kedua angka!";
+                hasilElement.style.color = "#e74c3c";
+                return;
+            }
+
+            let hasil = 0;
+            switch (operator) {
+                case '+':
+                    hasil = val1 + val2;
+                    break;
+                case '-':
+                    hasil = val1 - val2;
+                    break;
+                case '*':
+                    hasil = val1 * val2;
+                    break;
+                case '/':
+                    if (val2 === 0) {
+                        hasilElement.textContent = "Tidak dapat dibagi dengan 0!";
+                        hasilElement.style.color = "#e74c3c";
+                        return;
+                    }
+                    hasil = val1 / val2;
+                    break;
+            }
+
+            hasilElement.textContent = hasil;
+            hasilElement.style.color = "#27ae60";
+        }
+    </script>
+
+</body>
+</html>
